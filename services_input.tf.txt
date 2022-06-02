@@ -1,0 +1,70 @@
+variable "route53_external_hosted_zone_id" {
+  description = "The Route 53 hosted zone ID to create DNS abstractions in"
+  default     = ""
+}
+
+variable "resource_prefix" {}
+
+variable "aws_region_name" {}
+
+variable "aws_account_id" {}
+
+
+variable "dns_host" {
+  default = "github-collect"
+}
+
+variable "ssl_certificate_arn" {}
+
+variable "ti_url" {
+  default = "https://ti.replicon.com"
+}
+
+variable "dynamo_table_arn" {}
+
+variable "dynamo_table_name" {}
+
+variable "ti_client_id" {
+  default = "649a027dd67a4790b330f4aaa7248402"
+}
+
+variable "ti_client_secret" {
+  default = "3mFGH1uZf9GZ4hmynOKGQGChIg6mM3MpJdIxgsumlFE"
+}
+
+variable "github_client_id" {
+  default = "Iv1.d29630547d126acd"
+}
+
+variable "github_client_secret" {
+  default = "affa3676cfd2f6a2d3f078b707679145739b0dcf"
+}
+
+variable "github_verification_token" {
+  default = "TICGITHUB"
+}
+variable "github_app_id" {
+  default = "167987"
+}
+variable "github_app_name" {
+  default = "AnandTIAPP"
+}
+variable "github_private_key" {
+  default = ""
+}
+
+variable "queue_resource_prefix" {
+  type = string
+}
+variable "ti_redirect_url" {
+  default = "https://anand.rp.rplcn.co/ti-redirect"
+}
+variable "github_uninstall_redirect_url" {
+  default = "https://anand.rp.rplcn.co/ti-redirect"
+}
+variable "data_lake_url" {
+  default = "https://collector.ti.replicon.com"
+}
+variable "dlq_redrive_enabled" {
+  type = bool
+}
