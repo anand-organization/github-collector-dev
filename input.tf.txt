@@ -1,0 +1,76 @@
+variable "swimlane" {}
+
+variable "route53_external_hosted_zone_id" {
+  description = "The Route 53 hosted zone ID to create DNS abstractions in"
+  default     = "Z0895606KVM6W1WSG3L8"
+}
+
+variable "ssl_certificate_arn" {}
+
+variable "sumologic_cloudwatch_http_endpoint" {
+  type        = string
+  description = "Endpoint for cloudwatch to sumo"
+  default     = ""
+}
+variable "github_secret_name" {
+  description = "path to stored secrets in aws"
+  default     = "/ti/collector-github/test2"
+}
+variable "ti_secret_name" {
+  description = "path to stored ti client secret"
+  default     = "/ti/collector-github/ti"
+}
+
+variable "sumo_collection_enabled" {
+  type    = bool
+  default = true
+}
+
+variable "high_urgency_alarm_topic_arn" {
+  default = ""
+}
+
+variable "low_urgency_alarm_topic_arn" {
+  default = ""
+}
+
+variable "api_5xx_errors_threshold" {
+  type    = string
+  default = "1"
+}
+
+variable "api_4xx_errors_threshold" {
+  type    = string
+  default = "1"
+}
+variable "dlq_redrive_enabled" {
+  description = "enables the redrive lambda to requeue deadletter messages back to sqs for processing"
+
+  type    = bool
+  default = false
+}
+
+variable "health_alarm_topic_arn" {
+  default = ""
+}
+
+variable "canary_frequency" {
+  description = "canary execution frequency in minutes"
+  type        = number
+  default     = 180
+}
+
+variable "subnets" {
+  type    = list(string)
+  default = []
+}
+
+variable "canary_assign_public_ip" {
+  type    = bool
+  default = false
+}
+
+variable "canary_enabled" {
+  type    = bool
+  default = false
+}
