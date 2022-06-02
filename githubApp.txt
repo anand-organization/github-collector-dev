@@ -1,0 +1,9 @@
+App ID: 167987
+
+Client ID: Iv1.d29630547d126acd
+
+Private key
+SHA256:rOPyNBTVt4FBUaBkBHW6+UVKbQzymUy2pSTUwvf1hkc=
+
+Client secrets
+cd33ab225adbc9e44319b420b560375fa987909b
