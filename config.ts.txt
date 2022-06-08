@@ -1,0 +1,58 @@
+import dotenv from "dotenv";
+import { SSMClient, GetParameterCommand } from "@aws-sdk/client-ssm";
+export default class Config {
+  region: string;
+  collectorEndpoint: string;
+  tiHost: string;
+  tigaEndpoint: string;
+  globalEndpoint: string;
+  tiAuthEndpoint: string;
+  githubUserName: string;
+  installationId: string;
+  githubVerificationToken: string;
+  tiTenant: string;
+  tiUser: string;
+  tiUserEmail: string;
+  tiUserPassword: string;
+  tiClientId: string;
+  tiClientSecret: string;
+
+  constructor() {
+    dotenv.config();
+    this.region = process.env.AWS_REGION || "us-east-1";
+    this.collectorEndpoint =
+      process.env.COLLECTOR_ENDPOINT ||
+      "https://github-collector.ti.replicon.com";
+    this.tiAuthEndpoint =
+      process.env.AUTH_ENDPOINT || "https://sts.ti.replicon.com/oauth";
+    this.tiHost = process.env.TI_HOST || "ti.replicon.com";
+    this.tigaEndpoint =
+      process.env.TIGA_ENDPOINT || "https://graph.ti.replicon.com";
+    this.installationId = process.env.INSTALLATION_ID || "23137229";
+    this.globalEndpoint = "https://global.replicon.com";
+    this.tiTenant = "replicontidev";
+    this.tiUser = "anand";
+    this.tiUserEmail = "ticollectors+githubtesting@replicon.com";
+    this.tiUserPassword = "Replicon@123";
+    this.githubVerificationToken = process.env.GITHUB_VERIFICATION_TOKEN || "";
+    this.githubUserName = process.env.GITHUB_USER_NAME || "githubcollector";
+    this.tiClientId = "e5c20bee8b0e4c3c8a35058e3036e562";
+    this.tiClientSecret = "Replicon@123";
+  }
+
+  async init() {
+    this.githubVerificationToken = process.env.GITHUB_VERIFICATION_TOKEN;
+    if (this.githubVerificationToken) return;
+    console.log("github verification token");
+    const client = new SSMClient({
+      region: this.region,
+    });
+    const githubCredsCommand = new GetParameterCommand({
+      Name: "/ti/collector-github/test2",
+    });
+    const githubCredsRes = await client.send(githubCredsCommand);
+    this.githubVerificationToken = JSON.parse(
+      githubCredsRes.Parameter?.Value,
+    ).GITHUB_VERIFICATION_TOKEN;
+  }
+}
